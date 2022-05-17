@@ -1,0 +1,7 @@
+http://example.com/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/
+http://example.com/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/
+http://example.com/
+http://example.com/tags/hexo/
+http://example.com/tags/%E4%B8%BB%E9%A2%98/
+http://example.com/tags/%E6%90%AD%E5%BB%BA/
+http://example.com/categories/%E5%B7%A5%E5%85%B7/
