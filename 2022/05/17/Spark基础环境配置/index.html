@@ -3,22 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Spark基础环境配置 | zzlzyl</title>
+    <title>Spark基础环境配置 | Spark使用</title>
     
     
         <meta name="keywords" content="hexo,主题,搭建" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="本文主 本文主要使用Hexo与Github进行个人blog的搭建Hexo官网：HexoGithub官网：Github 环境介绍本地环境为: Window10系统、Linux虚拟机  开始搭建1.基础环境在开始配置前，需要检查虚拟机主机名、hosts映射、关闭防火墙、免密登录、同步时间等操作 （1）编辑主机名（三台机器）123456789#查看系统主机名(三台主机)$ cat &#x2F;etc&#x2F;hostna">
+    <meta name="description" content="本文主要使用Hexo与Github进行个人blog的搭建Hexo官网：HexoGithub官网：Github 环境介绍本地环境为: Window10系统、Linux虚拟机  开始搭建1.基础环境在开始配置前，需要检查虚拟机主机名、hosts映射、关闭防火墙、免密登录、同步时间等操作 （1）编辑主机名（三台机器）123456789#查看系统主机名(三台主机)$ cat &#x2F;etc&#x2F;hostname#在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark基础环境配置">
-<meta property="og:url" content="http://example.com/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
-<meta property="og:site_name" content="zzlzyl">
-<meta property="og:description" content="本文主 本文主要使用Hexo与Github进行个人blog的搭建Hexo官网：HexoGithub官网：Github 环境介绍本地环境为: Window10系统、Linux虚拟机  开始搭建1.基础环境在开始配置前，需要检查虚拟机主机名、hosts映射、关闭防火墙、免密登录、同步时间等操作 （1）编辑主机名（三台机器）123456789#查看系统主机名(三台主机)$ cat &#x2F;etc&#x2F;hostna">
+<meta property="og:url" content="https://github.com/zzlzyl/blog/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Spark使用">
+<meta property="og:description" content="本文主要使用Hexo与Github进行个人blog的搭建Hexo官网：HexoGithub官网：Github 环境介绍本地环境为: Window10系统、Linux虚拟机  开始搭建1.基础环境在开始配置前，需要检查虚拟机主机名、hosts映射、关闭防火墙、免密登录、同步时间等操作 （1）编辑主机名（三台机器）123456789#查看系统主机名(三台主机)$ cat &#x2F;etc&#x2F;hostname#在">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-17T12:18:46.617Z">
-<meta property="article:modified_time" content="2022-05-18T03:51:01.124Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2022-05-19T07:09:23.265Z">
+<meta property="article:author" content="zzl">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="主题">
 <meta property="article:tag" content="搭建">
@@ -26,41 +26,41 @@
     
 
     
-        <link rel="alternate" href="/atom.xml" title="zzlzyl" type="application/atom+xml" />
+        <link rel="alternate" href="/atom.xml" title="Spark使用" type="application/atom+xml" />
     
 
     
-        <link rel="icon" href="/css/images/favicon.ico" />
+        <link rel="icon" href="/blog/css/images/favicon.ico" />
     
 
     
-<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
 
     
-<link rel="stylesheet" href="/libs/open-sans/styles.css">
+<link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
 
     
-<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+<link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
 
 
     
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/blog/css/style.css">
 
     
-<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
 
     
-<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
-
-    
-    
-        
-<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+<script src="/blog/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
 
     
     
         
-<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
 
     
     
@@ -78,21 +78,21 @@
         <header id="header">
     <div id="header-main" class="header-inner">
         <div class="outer">
-            <a href="/" id="logo">
+            <a href="/blog/" id="logo">
                 <i class="logo"></i>
-                <span class="site-title">zzlzyl</span>
+                <span class="site-title">Spark使用</span>
             </a>
             <nav id="main-nav">
                 
-                    <a class="main-nav-link" href="/">首页</a>
+                    <a class="main-nav-link" href="/blog/">首页</a>
                 
-                    <a class="main-nav-link" href="/archives">归档</a>
+                    <a class="main-nav-link" href="/blog/archives">归档</a>
                 
-                    <a class="main-nav-link" href="/categories">分类</a>
+                    <a class="main-nav-link" href="/blog/categories">分类</a>
                 
-                    <a class="main-nav-link" href="/tags">标签</a>
+                    <a class="main-nav-link" href="/blog/tags">标签</a>
                 
-                    <a class="main-nav-link" href="/about">关于</a>
+                    <a class="main-nav-link" href="/blog/about">关于</a>
                 
             </nav>
             
@@ -100,7 +100,7 @@
                 <nav id="sub-nav">
                     <div class="profile" id="profile-nav">
                         <a id="profile-anchor" href="javascript:;">
-                            <img class="avatar" src="/css/images/au.png" />
+                            <img class="avatar" src="/blog/css/images/au.png" />
                             <i class="fa fa-caret-down"></i>
                         </a>
                     </div>
@@ -134,14 +134,14 @@
             TAGS: '标签',
             UNTITLED: '(未命名)',
         },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
     };
     window.INSIGHT_CONFIG = INSIGHT_CONFIG;
 })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="/blog/js/insight.js"></script>
 
 
 </div>
@@ -151,15 +151,15 @@
         <table class="menu outer">
             <tr>
                 
-                    <td><a class="main-nav-link" href="/">首页</a></td>
+                    <td><a class="main-nav-link" href="/blog/">首页</a></td>
                 
-                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                    <td><a class="main-nav-link" href="/blog/archives">归档</a></td>
                 
-                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                    <td><a class="main-nav-link" href="/blog/categories">分类</a></td>
                 
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                    <td><a class="main-nav-link" href="/blog/tags">标签</a></td>
                 
-                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                    <td><a class="main-nav-link" href="/blog/about">关于</a></td>
                 
                 <td>
                     
@@ -180,7 +180,7 @@
 <aside id="profile">
     <div class="inner profile-inner">
         <div class="base-info profile-block">
-            <img id="avatar" src="/css/images/au.png" />
+            <img id="avatar" src="/blog/css/images/au.png" />
             <h2 id="name">zzlzyl</h2>
             <h3 id="title">Spark &amp; Programmer</h3>
             <span id="location"><i class="fa fa-map-marker"></i>PuYang, China</span>
@@ -209,7 +209,7 @@
                     </td>
                     
                     <td>
-                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                        <a href="/blog/atom.xml" target="_blank" title="rss" class=tooltip>
                             <i class="fa fa-rss"></i>
                         </a>
                     </td>
@@ -244,7 +244,7 @@
                             &nbsp;
                             工具
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file active"><a href="/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Spark基础环境配置</a></li>  <li class="file"><a href="/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/">Spark local & stand-alone配置-中文文档</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file active"><a href="/blog/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Spark基础环境配置</a></li>  <li class="file"><a href="/blog/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/">Spark local & stand-alone配置-中文文档</a></li>  </ul> 
                     </li> 
                      </ul> 
     </div>
@@ -327,19 +327,19 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+        <a class="article-category-link" href="/blog/categories/%E5%B7%A5%E5%85%B7/">工具</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/hexo/" rel="tag">hexo</a>, <a class="tag-link-link" href="/tags/%E4%B8%BB%E9%A2%98/" rel="tag">主题</a>, <a class="tag-link-link" href="/tags/%E6%90%AD%E5%BB%BA/" rel="tag">搭建</a>
+        <a class="tag-link-link" href="/blog/tags/hexo/" rel="tag">hexo</a>, <a class="tag-link-link" href="/blog/tags/%E4%B8%BB%E9%A2%98/" rel="tag">主题</a>, <a class="tag-link-link" href="/blog/tags/%E6%90%AD%E5%BB%BA/" rel="tag">搭建</a>
     </div>
 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+        <a href="/blog/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
             <time datetime="2022-05-17T12:18:46.617Z" itemprop="datePublished">2022-05-17</time>
         </a>
     </div>
@@ -351,13 +351,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzlzyl/blog/raw/master/source/_posts/Spark基础环境配置.md'> Source </a>
+                                <a href='https://github.com/zzlzyl/blog/raw/master/source/_posts/Spark基础环境配置.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzlzyl/blog/edit/master/source/_posts/Spark基础环境配置.md'> Edit </a>
+                                <a href='https://github.com/zzlzyl/blog/edit/master/source/_posts/Spark基础环境配置.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzlzyl/blog/commits/master/source/_posts/Spark基础环境配置.md'> History </a>
+                                <a href='https://github.com/zzlzyl/blog/commits/master/source/_posts/Spark基础环境配置.md'> History </a>
                             </div>
                         
                     </div>
@@ -378,8 +378,7 @@
             
         
         
-            <p>本文主</p>
-<p>本文主要使用Hexo与Github进行个人blog的搭建<br>Hexo官网：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a><br>Github官网：<a target="_blank" rel="noopener" href="https://github.com/">Github</a></p>
+            <p>本文主要使用Hexo与Github进行个人blog的搭建<br>Hexo官网：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a><br>Github官网：<a href="https://github.com/">Github</a></p>
 <h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><p>本地环境为: Window10系统、Linux虚拟机</p>
 <hr>
 <h1 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h1><h2 id="1-基础环境"><a href="#1-基础环境" class="headerlink" title="1.基础环境"></a>1.基础环境</h2><p>在开始配置前，需要检查虚拟机主机名、hosts映射、关闭防火墙、免密登录、同步时间等操作</p>
@@ -427,7 +426,7 @@
     
 <nav id="article-nav">
     
-        <a href="/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/blog/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
@@ -458,9 +457,9 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            John Doe &copy; 2022 
+            zzl &copy; 2022 
             <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
-            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
             
                 <br>
                 <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
@@ -475,36 +474,36 @@
 
     
         
-<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+<script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
 
     
     
         
-<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
 
     
     
@@ -534,7 +533,7 @@
 
 <!-- Custom Scripts -->
 
-<script src="/js/main.js"></script>
+<script src="/blog/js/main.js"></script>
 
 
     </div>
