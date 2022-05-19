@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2022/05/19/Spark%20HA%20&%20Yarn%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2022-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2022-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2022-05-19</lastmod>
@@ -14,15 +32,6 @@
     <loc>http://example.com/tags/index.html</loc>
     
     <lastmod>2022-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/</loc>
-    
-    <lastmod>2022-05-18</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
