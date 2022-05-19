@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <loc>http://example.com/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2022-05-19</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/tags/index.html</loc>
+    <loc>http://example.com/tags/index.html</loc>
     
     <lastmod>2022-05-19</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/</loc>
+    <loc>http://example.com/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2022-05-18</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/404.html</loc>
+    <loc>http://example.com/404.html</loc>
     
     <lastmod>2022-05-17</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/about/index.html</loc>
+    <loc>http://example.com/about/index.html</loc>
     
     <lastmod>2022-05-17</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/categories/index.html</loc>
+    <loc>http://example.com/categories/index.html</loc>
     
     <lastmod>2022-05-17</lastmod>
     
@@ -57,7 +57,7 @@
   
 
   <url>
-    <loc>https://github.com/zzlzyl/blog</loc>
+    <loc>http://example.com/</loc>
     <lastmod>2022-05-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -65,21 +65,21 @@
 
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/tags/hexo/</loc>
+    <loc>http://example.com/tags/hexo/</loc>
     <lastmod>2022-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/tags/%E4%B8%BB%E9%A2%98/</loc>
+    <loc>http://example.com/tags/%E4%B8%BB%E9%A2%98/</loc>
     <lastmod>2022-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/tags/%E6%90%AD%E5%BB%BA/</loc>
+    <loc>http://example.com/tags/%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2022-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -88,7 +88,7 @@
 
   
   <url>
-    <loc>https://github.com/zzlzyl/blog/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>http://example.com/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
