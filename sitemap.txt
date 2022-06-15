@@ -1,6 +1,8 @@
+http://example.com/2022/06/15/Kafka%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/
 http://example.com/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/
-http://example.com/2022/05/19/Spark%20HA%20&%20Yarn%E9%85%8D%E7%BD%AE/
+http://example.com/2022/06/15/Kafka%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/
 http://example.com/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/
+http://example.com/2022/05/19/Spark%20HA%20&%20Yarn%E9%85%8D%E7%BD%AE/
 http://example.com/tags/index.html
 http://example.com/404.html
 http://example.com/about/index.html

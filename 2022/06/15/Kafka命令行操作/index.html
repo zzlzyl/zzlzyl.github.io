@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Spark local &amp; stand-alone配置 | Spark使用</title>
+    
+    
+        <meta name="keywords" content="hexo,主题,搭建" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="注意：以下操作需要完成 Spark 基础环境配置。具体配置移步到Spark基础环境配置 1.Kafka安装本文使用的 Kafka 是2.11-2.0.0版本Kafka 3.2.0 安装包下载注意：下载要注意 Kafka 的版本，同时选择后缀为 .tar.gz的安装包**本文使用的安装包是 kafka_2.11-2.0.0.tgz ** 1234567#把本地下载好的 kafka_2.11-2.0.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark local &amp; stand-alone配置">
+<meta property="og:url" content="http://example.com/2022/06/15/Kafka%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Spark使用">
+<meta property="og:description" content="注意：以下操作需要完成 Spark 基础环境配置。具体配置移步到Spark基础环境配置 1.Kafka安装本文使用的 Kafka 是2.11-2.0.0版本Kafka 3.2.0 安装包下载注意：下载要注意 Kafka 的版本，同时选择后缀为 .tar.gz的安装包**本文使用的安装包是 kafka_2.11-2.0.0.tgz ** 1234567#把本地下载好的 kafka_2.11-2.0.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/001.png">
+<meta property="article:published_time" content="2022-06-15T11:58:03.012Z">
+<meta property="article:modified_time" content="2022-06-15T12:54:52.865Z">
+<meta property="article:author" content="zzl">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="主题">
+<meta property="article:tag" content="搭建">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/001.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Spark使用" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Spark使用</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/au.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/au.png" />
+            <h2 id="name">zzlzyl</h2>
+            <h3 id="title">Spark &amp; Programmer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>PuYang, China</span>
+            <a id="follow" target="_blank" href="https://github.com/zzlzyl">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                5
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                3
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/zzlzyl/zzlzyl.github.io" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-up fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" style="display: block;"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/2022/05/17/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Spark基础环境配置</a></li>  <li class="file"><a href="/2022/05/17/Spark%20local&%20stand-alone%E9%85%8D%E7%BD%AE/">Spark local & stand-alone配置</a></li>  <li class="file"><a href="/2022/05/19/Spark%20HA%20&%20Yarn%E9%85%8D%E7%BD%AE/">Spark HA & Yarn配置</a></li>  <li class="file"><a href="/2022/06/15/Kafka%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Kafka基础环境配置</a></li>  <li class="file active"><a href="/2022/06/15/Kafka%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">Spark local & stand-alone配置</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Kafka命令行操作" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/hexo/" rel="tag">hexo</a>, <a class="tag-link-link" href="/tags/%E4%B8%BB%E9%A2%98/" rel="tag">主题</a>, <a class="tag-link-link" href="/tags/%E6%90%AD%E5%BB%BA/" rel="tag">搭建</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2022/06/15/Kafka%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">
+            <time datetime="2022-06-15T11:58:03.012Z" itemprop="datePublished">2022-06-15</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzlzyl/blog/raw/master/source/_posts/Kafka命令行操作.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzlzyl/blog/edit/master/source/_posts/Kafka命令行操作.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzlzyl/blog/commits/master/source/_posts/Kafka命令行操作.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Spark local &amp; stand-alone配置
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><strong>注意：以下操作需要完成 Spark 基础环境配置。具体配置移步到<a href="../../15/Kafka%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">Spark基础环境配置</a></strong></p>
+<h2 id="1-Kafka安装"><a href="#1-Kafka安装" class="headerlink" title="1.Kafka安装"></a>1.Kafka安装</h2><p>本文使用的 Kafka 是2.11-2.0.0版本<br><a target="_blank" rel="noopener" href="https://kafka.apache.org/downloads">Kafka 3.2.0 安装包下载</a><br><strong>注意：下载要注意 Kafka 的版本，同时选择后缀为 .tar.gz的安装包</strong><br>**本文使用的安装包是 kafka_2.11-2.0.0.tgz **</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把本地下载好的 kafka_2.11-2.0.0.tgz安装包上传到 /export/server 并解压</span></span><br><span class="line">$ <span class="built_in">cd</span> /export/server/</span><br><span class="line">$ tar -zxvf kafka_2.11-2.0.0.tgz -C /export/server/</span><br><span class="line"><span class="comment">#建立软连接</span></span><br><span class="line">$ <span class="built_in">ln</span> -s /export/server/kafka_2.11-2.0.0.tgz /export/server/kafka</span><br><span class="line"><span class="comment">#master 节点节点进入 /export/server/kafka/config 修改以下配置文件</span></span><br><span class="line">$ <span class="built_in">cd</span> /export/server/kafka/config</span><br></pre></td></tr></table></figure>
+<h4 id="编辑文件-server-properties"><a href="#编辑文件-server-properties" class="headerlink" title="编辑文件 server.properties"></a>编辑文件 server.properties</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ vim server.properties</span><br><span class="line"><span class="comment">#21 行内容 broker.id=0 为依次增长的:0、1、2、3、4,集群中唯一 id 从0开始，每台不能重复</span></span><br><span class="line"><span class="comment">#（注：此处为master节点，不用修改）</span></span><br><span class="line"><span class="variable">$broker</span>.<span class="built_in">id</span>=0</span><br><span class="line"></span><br><span class="line"><span class="comment">#31 行内容 #listeners=PLAINTEXT://:9092 取消注释，内容改为</span></span><br><span class="line">$ listeners=PLAINTEXT://master:9092</span><br><span class="line"></span><br><span class="line"><span class="comment">#59 行内容 log.dirs=/tmp/kafka-logs 为默认日志文件存储的位置，改为</span></span><br><span class="line"><span class="variable">$log</span>.<span class="built_in">dirs</span>=/export/server/data/kafka-log</span><br><span class="line"></span><br><span class="line"><span class="comment">#63 行内容为 num.partitions=1 是默认分区数</span></span><br><span class="line">$ num.partitions=1</span><br><span class="line"></span><br><span class="line"><span class="comment">#121 行内容 zookeeper.connect=localhost:2181 修改为</span></span><br><span class="line"><span class="variable">$zookeeper</span>.connect=master:2181,slave1:2181,slave2:2181</span><br><span class="line"></span><br><span class="line"><span class="comment">#126 行内容 group.initial.rebalance.delay.ms=0 修改为</span></span><br><span class="line">$ group.initial.rebalance.delay.ms=3000</span><br></pre></td></tr></table></figure>
+<h2 id="2-分发"><a href="#2-分发" class="headerlink" title="2.分发"></a>2.分发</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#master 节点分发 kafka 安装文件夹 到 slave1 和 slave2 上</span></span><br><span class="line">$ <span class="built_in">cd</span> /export/server</span><br><span class="line">$ scp -r /export/server/kafka_2.11-2.0.0.tgz/ slave1:<span class="variable">$PWD</span></span><br><span class="line">$ scp -r /export/server/kafka_2.11-2.0.0.tgz/ slave2:<span class="variable">$PWD</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置 kafka 环境变量，master、slave1、slave2都需要进行操作</span></span><br><span class="line"><span class="comment">#vim /etc/profile</span></span><br><span class="line"><span class="comment">#文件最后添加以下内容</span></span><br><span class="line"><span class="comment"># kafka 环境变量 </span></span><br><span class="line">$ <span class="built_in">export</span> KAFKA_HOME=/export/server/kafka </span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$KAFKA_HOME</span>/bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#三台机器操作完成重新加载环境变量</span></span><br><span class="line">$ <span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在 slave1 节点上</span></span><br><span class="line">$ <span class="built_in">cd</span> /export/server</span><br><span class="line">$ <span class="built_in">ln</span> -s /export/server/kafka_2.11-2.0.0/ kafka</span><br><span class="line"><span class="comment">#进入 /export/server/kafka/config 修改以下配置文件</span></span><br><span class="line">$ <span class="built_in">cd</span> /export/server/kafka/config</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim server.properties</span><br><span class="line"><span class="comment">#将文件 server.properties 的第 21 行的 broker.id=0 修改为 </span></span><br><span class="line">$ broker.id=1 </span><br><span class="line"><span class="comment">#将文件 server.properties 的第 31 行的 listeners=PLAINTEXT://master:9092 修改为</span></span><br><span class="line">$ listeners=PLAINTEXT://slave1:9092</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在 slave2 节点上</span></span><br><span class="line">$ <span class="built_in">cd</span> /export/server</span><br><span class="line">$ <span class="built_in">ln</span> -s /export/server/kafka_2.11-2.0.0/ kafka</span><br><span class="line"><span class="comment">#进入 /export/server/kafka/config 修改以下配置文件</span></span><br><span class="line">$ <span class="built_in">cd</span> /export/server/kafka/config</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim server.properties</span><br><span class="line"><span class="comment">#将文件 server.properties 的第 21 行的 broker.id=0 修改为 </span></span><br><span class="line">$ broker.id=2 </span><br><span class="line"><span class="comment">#将文件 server.properties 的第 31 行的 listeners=PLAINTEXT://master:9092 修改为</span></span><br><span class="line">$ listeners=PLAINTEXT://slave2:9092</span><br></pre></td></tr></table></figure>
+<p><strong>以上操作完成回到 master 节点</strong></p>
+<h4 id="启动-kafka"><a href="#启动-kafka" class="headerlink" title="启动 kafka"></a>启动 kafka</h4><p><strong>注意：启动 kafka 需要启动 zookeeper</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动 kafka,三台机器同时执行</span></span><br><span class="line">$ kafka-server-start.sh -daemon /export/server/kafka/config/server.properties</span><br><span class="line"><span class="comment">#启动完成后通过jps查看其状态</span></span><br></pre></td></tr></table></figure>
+<p><img src="/../images/001.png"></p>
+<h4 id="设置脚本便于启动三台机器"><a href="#设置脚本便于启动三台机器" class="headerlink" title="设置脚本便于启动三台机器"></a>设置脚本便于启动三台机器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入到bin目录下</span></span><br><span class="line"><span class="variable">$cd</span> /root/bin</span><br><span class="line"><span class="comment"># 创建并编辑名为kafka-all.sh的脚本</span></span><br><span class="line">$ vim kafka-all.sh</span><br><span class="line"><span class="comment">#在文件内添加如下内容</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="variable">$#</span> -eq 0 ] ;</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">  	<span class="built_in">echo</span> <span class="string">&quot;please input param:start stop&quot;</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="variable">$1</span> = start  ] ;<span class="keyword">then</span>	</span><br><span class="line">  	<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;1&#125;</span>ing master&quot;</span></span><br><span class="line">  	ssh master <span class="string">&quot;source /etc/profile;kafka-server-start.sh -daemon /export/server/kafka/config/server.properties&quot;</span></span><br><span class="line">  	<span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..2&#125;</span><br><span class="line">  	<span class="keyword">do</span></span><br><span class="line">  		<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;1&#125;</span>ing slave<span class="variable">$&#123;i&#125;</span>&quot;</span>	</span><br><span class="line">  		ssh slave<span class="variable">$&#123;i&#125;</span> <span class="string">&quot;source /etc/profile;kafka-server-start.sh -daemon /export/server/kafka/config/server.properties&quot;</span></span><br><span class="line">  	<span class="keyword">done</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="variable">$1</span> = stop ];<span class="keyword">then</span></span><br><span class="line">  	<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;1&#125;</span>ping master &quot;</span></span><br><span class="line">  	ssh master <span class="string">&quot;source /etc/profile;kafka-server-stop.sh&quot;</span></span><br><span class="line">  	<span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..2&#125;</span><br><span class="line">  	<span class="keyword">do</span></span><br><span class="line">  		<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;1&#125;</span>ping slave<span class="variable">$&#123;i&#125;</span>&quot;</span>	</span><br><span class="line">  		ssh slave<span class="variable">$&#123;i&#125;</span> <span class="string">&quot;source /etc/profile;kafka-server-stop.sh&quot;</span></span><br><span class="line">  	<span class="keyword">done</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-Kafka命令行操作"><a href="#3-Kafka命令行操作" class="headerlink" title="3.Kafka命令行操作"></a>3.Kafka命令行操作</h2><h4 id="（1）创建topic"><a href="#（1）创建topic" class="headerlink" title="（1）创建topic"></a>（1）创建topic</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kafka-configs.sh --create --topic tpc_1 --partitions 2 --replication-factor2 --zookeeper node1:2181</span><br></pre></td></tr></table></figure>
+<h4 id="（2）删除topic"><a href="#（2）删除topic" class="headerlink" title="（2）删除topic"></a>（2）删除topic</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kafka-topics.sh  --delete --topic tpc_1 --zookeeper node1:2181</span><br></pre></td></tr></table></figure>
+<h4 id="（3）查看topic"><a href="#（3）查看topic" class="headerlink" title="（3）查看topic"></a>（3）查看topic</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看当前系统中的所有topic</span></span><br><span class="line">$ kafka-topics.sh --zookeeper node1:2181-list</span><br><span class="line"><span class="comment">#查看topic详细信息</span></span><br><span class="line">$ kafka-configs.sh --create --topic tpc_1 --zookeeper node1:2181--replication-factor0:1</span><br></pre></td></tr></table></figure>
+
+<h4 id="（4）增加分区数"><a href="#（4）增加分区数" class="headerlink" title="（4）增加分区数"></a>（4）增加分区数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --alter --topic tpc_1 --partitions 3 --zookeeper node1:2181</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="（5）动态配置topic参数"><a href="#（5）动态配置topic参数" class="headerlink" title="（5）动态配置topic参数"></a>（5）动态配置topic参数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#通过管理命令，可以为已创建的topic增加，修改，删除 topic level 参数</span></span><br><span class="line"><span class="comment">#添加，修改配置参数</span></span><br><span class="line">$ kafka-configs.sh --zookeeper node1:2181 --entity-type topics --entity-name tpc_1 --alter --add-config compression.type=gzip</span><br><span class="line"><span class="comment">#删除配置参数</span></span><br><span class="line">$ kafka-configs.sh --zookeeper node1:2181 --entity-type topics --entity-name tpc_1 --alter --delete-config compression.type</span><br></pre></td></tr></table></figure>
+
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/2022/06/15/Kafka%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Kafka基础环境配置</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            zzl &copy; 2022 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
