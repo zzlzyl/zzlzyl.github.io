@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2022/06/15/Kafka%20API%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
+    
+    <lastmod>2022-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2022/06/15/Kafka%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2022-06-15</lastmod>
